@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clinica.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.Models
 {
-    public class PacoteExame : ICloneable
+    public class PacoteExame : IPrototipo<PacoteExame>
     {
         public string NomePacote { get; set; }
         public string OrientacoesJejum { get; set; }
@@ -26,30 +27,31 @@ namespace Clinica.Models
             Procedimentos.Add(procedimento);
         }
 
-        public object Clone()
+        // Cópia profunda (Deep Copy)
+        public PacoteExame Clonar()
         {
+            // Copia os dados básicos do pacote
             PacoteExame pacoteClonado = (PacoteExame)this.MemberwiseClone();
 
+            // Cria uma nova lista independente
             pacoteClonado.Procedimentos = new List<Procedimento>();
 
+            // Clona cada procedimento
             foreach (Procedimento item in this.Procedimentos)
             {
-                Procedimento itemCopia = (Procedimento)item.Clone();
+                Procedimento itemCopia = item.Clonar();
                 pacoteClonado.Procedimentos.Add(itemCopia);
             }
 
             return pacoteClonado;
         }
 
-        // Cópia superficial, mantida para fins de comparação
+        // Cópia superficial para fins de comparação
         public PacoteExame ClonarSuperficial()
         {
-            PacoteExame pacoteRaso =
-                new PacoteExame(this.NomePacote, this.OrientacoesJejum);
+            PacoteExame pacoteRaso = (PacoteExame)this.MemberwiseClone();
 
-            pacoteRaso.NomePaciente = this.NomePaciente;
-
-            // Compartilha a mesma lista de procedimentos
+            // A lista será compartilhada com o pacote original
             pacoteRaso.Procedimentos = this.Procedimentos;
 
             return pacoteRaso;

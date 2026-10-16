@@ -2,51 +2,71 @@
 using Clinica.Models;
 using Clinica.Services;
 
-Console.WriteLine("=== SISTEMA DA CLÍNICA VIDA & SAÚDE - PATTERN PROTOTYPE ===\n");
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("=== SISTEMA DA CLÍNICA VIDA & SAÚDE - PATTERN PROTOTYPE ===\n");
 
-GerenciadorPrototipos gerenciador = new GerenciadorPrototipos();
+        GerenciadorPrototipos gerenciador = new GerenciadorPrototipos();
 
-// 1. CONFIGURAÇÃO DOS MODELOS BASE (Protótipos)
-PacoteExame checkupCardio = new PacoteExame("Check-up Cardiológico", "Jejum de 8h e evitar cafeína");
-checkupCardio.AdicionarProcedimento(new Procedimento("Eletrocardiograma", 150.00m));
-checkupCardio.AdicionarProcedimento(new Procedimento("Ecocardiograma", 350.00m));
+        // 1. CONFIGURAÇÃO DOS MODELOS BASE (Protótipos)
+        PacoteExame checkupCardio = new PacoteExame(
+            "Check-up Cardiológico",
+            "Jejum de 8h e evitar cafeína"
+        );
 
-// Cadastra o modelo no gerenciador
-gerenciador.CadastrarPrototipo("CARDIO_PADRAO", checkupCardio);
+        checkupCardio.AdicionarProcedimento(
+            new Procedimento("Eletrocardiograma", 150.00m)
+        );
 
-Console.WriteLine("--- Modelo Base Cadastrado ---");
-checkupCardio.ExibirResumo();
+        checkupCardio.AdicionarProcedimento(
+            new Procedimento("Ecocardiograma", 350.00m)
+        );
 
-// 2. USO CORRETO: Clonando via Cópia Profunda (Deep Copy)
-Console.WriteLine("\n------------------------------------------------");
-Console.WriteLine("--> Atendimento 1: Clonando modelo base via Clonar() [Deep Copy]");
+        // Cadastra o modelo no gerenciador
+        gerenciador.CadastrarPrototipo("CARDIO_PADRAO", checkupCardio);
 
-PacoteExame atendimento1 = gerenciador.ObterClone("CARDIO_PADRAO");
-atendimento1.NomePaciente = "Carlos Eduardo";
+        Console.WriteLine("--- Modelo Base Cadastrado ---");
+        checkupCardio.ExibirResumo();
 
-// Adicionando procedimento extra exclusivo para o Paciente 1
-atendimento1.AdicionarProcedimento(new Procedimento("Holter 24h", 250.00m));
+        // 2. CLONAGEM COM CÓPIA PROFUNDA (Deep Copy)
+        Console.WriteLine("\n------------------------------------------------");
+        Console.WriteLine("--> Atendimento 1: Clonando via Clonar() [Deep Copy]");
 
-atendimento1.ExibirResumo();
+        PacoteExame atendimento1 = gerenciador.ObterClone("CARDIO_PADRAO");
+        atendimento1.NomePaciente = "Carlos Eduardo";
 
-// 3. DEMONSTRAÇÃO DO ERRO DA CÓPIA SUPERFICIAL (Shallow Copy)
-Console.WriteLine("\n------------------------------------------------");
-Console.WriteLine("--> Atendimento 2: Exemplo de Clonagem Superficial (Incorreta)");
+        // Procedimento exclusivo para o Paciente 1
+        atendimento1.AdicionarProcedimento(
+            new Procedimento("Holter 24h", 250.00m)
+        );
 
-PacoteExame modeloOriginal = gerenciador.ObterClone("CARDIO_PADRAO");
-PacoteExame atendimentoErro = modeloOriginal.ClonarSuperficial(); // Compartilha a mesma lista
-atendimentoErro.NomePaciente = "Ana Maria";
+        atendimento1.ExibirResumo();
 
-// Adiciona procedimento no pacote da Ana Maria
-atendimentoErro.AdicionarProcedimento(new Procedimento("Glicemia em Jejum", 30.00m));
+        // 3. DEMONSTRAÇÃO DA CÓPIA SUPERFICIAL (Shallow Copy)
+        Console.WriteLine("\n------------------------------------------------");
+        Console.WriteLine("--> Atendimento 2: Exemplo de Clonagem Superficial");
 
-Console.WriteLine("\n[Atendimento da Ana Maria com o novo exame]:");
-atendimentoErro.ExibirResumo();
+        PacoteExame modeloOriginal = gerenciador.ObterClone("CARDIO_PADRAO");
 
-Console.WriteLine("\n[VERIFICAÇÃO]: O Modelo Base também foi alterado indevidamente:");
-modeloOriginal.ExibirResumo(); // A alteração afetou o modelo original porque a lista era a mesma!
+        PacoteExame atendimentoErro = modeloOriginal.ClonarSuperficial();
+        atendimentoErro.NomePaciente = "Ana Maria";
 
-// 4. CONFIRMAÇÃO DO ISOLAMENTO DO ATENDIMENTO 1
-Console.WriteLine("\n------------------------------------------------");
-Console.WriteLine("[VERIFICAÇÃO]: Atendimento 1 (Deep Copy) permaneceu intacto:");
-atendimento1.ExibirResumo();
+        // Adiciona procedimento ao pacote da Ana Maria
+        atendimentoErro.AdicionarProcedimento(
+            new Procedimento("Glicemia em Jejum", 30.00m)
+        );
+
+        Console.WriteLine("\n[Atendimento da Ana Maria com o novo exame]:");
+        atendimentoErro.ExibirResumo();
+
+        Console.WriteLine("\n[VERIFICAÇÃO]: O modelo original também foi alterado:");
+        modeloOriginal.ExibirResumo();
+
+        // 4. CONFIRMAÇÃO DO ISOLAMENTO DO ATENDIMENTO 1
+        Console.WriteLine("\n------------------------------------------------");
+        Console.WriteLine("[VERIFICAÇÃO]: Atendimento 1 (Deep Copy) permaneceu intacto:");
+        atendimento1.ExibirResumo();
+    }
+}

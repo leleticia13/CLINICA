@@ -9,7 +9,9 @@ namespace Clinica.Services
 {
     public class GerenciadorPrototipos
     {
-        private Dictionary<string, PacoteExame> _prototipos = new Dictionary<string, PacoteExame>();
+        // Dicionário para armazenar os protótipos
+        private Dictionary<string, PacoteExame> _prototipos =
+            new Dictionary<string, PacoteExame>();
 
         public void CadastrarPrototipo(string chave, PacoteExame prototipo)
         {
@@ -20,9 +22,10 @@ namespace Clinica.Services
         {
             if (_prototipos.ContainsKey(chave))
             {
-                // Busca o modelo original e chama o nosso método Clonar() manual
+                // Busca o modelo original e cria uma cópia
                 PacoteExame modeloOriginal = _prototipos[chave];
-                return (PacoteExame)modeloOriginal.Clone();
+
+                return modeloOriginal.Clonar();
             }
 
             return null;

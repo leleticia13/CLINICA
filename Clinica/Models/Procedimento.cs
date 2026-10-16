@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Clinica.Interfaces;
 
 namespace Clinica.Models
 {
-    public class Procedimento : ICloneable
+    public class Procedimento : IPrototipo<Procedimento>
     {
         public string Nome { get; set; }
         public decimal Valor { get; set; }
@@ -18,9 +19,10 @@ namespace Clinica.Models
         }
 
         // Clonagem Manual: Criamos uma NOVA instância usando 'new' com os mesmos dados
-        public object Clone()
+        public Procedimento Clonar()
         {
-            return this.MemberwiseClone();
+            return (Procedimento)this.MemberwiseClone();
         }
+      
     }
 }
