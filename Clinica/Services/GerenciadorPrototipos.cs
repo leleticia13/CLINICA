@@ -22,7 +22,7 @@ namespace Clinica.Services
             {
                 // Busca o modelo original e chama o nosso método Clonar() manual
                 PacoteExame modeloOriginal = _prototipos[chave];
-                return modeloOriginal.Clonar();
+                return (PacoteExame)modeloOriginal.Clone();
             }
 
             return null;

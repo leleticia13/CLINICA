@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.Models
 {
-    public class Procedimento
+    public class Procedimento : ICloneable
     {
         public string Nome { get; set; }
         public decimal Valor { get; set; }
@@ -18,10 +18,9 @@ namespace Clinica.Models
         }
 
         // Clonagem Manual: Criamos uma NOVA instância usando 'new' com os mesmos dados
-        public Procedimento Clonar()
+        public object Clone()
         {
-            Procedimento novoProcedimento = new Procedimento(this.Nome, this.Valor);
-            return novoProcedimento;
+            return this.MemberwiseClone();
         }
     }
 }
