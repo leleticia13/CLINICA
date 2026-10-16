@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\aluno.senai\\Documents\\Clinica Medica\\CLINICA\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{79932E60-8715-4264-95F3-07D07EC20906}|Clinica\\Clinica.csproj|c:\\users\\aluno.senai\\documents\\clinica medica\\clinica\\clinica\\models\\pacoteexame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79932E60-8715-4264-95F3-07D07EC20906}|Clinica\\Clinica.csproj|solutionrelative:clinica\\models\\pacoteexame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{79932E60-8715-4264-95F3-07D07EC20906}|Clinica\\Clinica.csproj|c:\\users\\aluno.senai\\documents\\clinica medica\\clinica\\clinica\\models\\procedimento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{79932E60-8715-4264-95F3-07D07EC20906}|Clinica\\Clinica.csproj|solutionrelative:clinica\\models\\procedimento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,6 +27,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PacoteExame.cs",
+              "DocumentMoniker": "C:\\Users\\aluno.senai\\Documents\\Clinica Medica\\CLINICA\\Clinica\\Models\\PacoteExame.cs",
+              "RelativeDocumentMoniker": "Clinica\\Models\\PacoteExame.cs",
+              "ToolTip": "C:\\Users\\aluno.senai\\Documents\\Clinica Medica\\CLINICA\\Clinica\\Models\\PacoteExame.cs",
+              "RelativeToolTip": "Clinica\\Models\\PacoteExame.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAQwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T12:53:27.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Procedimento.cs",
               "DocumentMoniker": "C:\\Users\\aluno.senai\\Documents\\Clinica Medica\\CLINICA\\Clinica\\Models\\Procedimento.cs",
               "RelativeDocumentMoniker": "Clinica\\Models\\Procedimento.cs",
