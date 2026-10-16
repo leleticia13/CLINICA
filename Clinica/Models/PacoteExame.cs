@@ -26,16 +26,12 @@ namespace Clinica.Models
             Procedimentos.Add(procedimento);
         }
 
-        // Cópia profunda (Deep Copy)
         public object Clone()
         {
-            // Cria um novo pacote
-            PacoteExame pacoteClonado =
-                new PacoteExame(this.NomePacote, this.OrientacoesJejum);
+            PacoteExame pacoteClonado = (PacoteExame)this.MemberwiseClone();
 
-            pacoteClonado.NomePaciente = this.NomePaciente;
+            pacoteClonado.Procedimentos = new List<Procedimento>();
 
-            // Clona cada procedimento para criar uma lista independente
             foreach (Procedimento item in this.Procedimentos)
             {
                 Procedimento itemCopia = (Procedimento)item.Clone();
