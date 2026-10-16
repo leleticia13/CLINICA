@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.Models
 {
-    internal class Procedimento
+    public class Procedimento
     {
         public string Nome { get; set; }
         public decimal Valor { get; set; }

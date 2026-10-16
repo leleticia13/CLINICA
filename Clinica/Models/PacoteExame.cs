@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.Models
 {
-    internal class PacoteExame
+    public class PacoteExame
     {
         public string NomePacote { get; set; }
         public string OrientacoesJejum { get; set; }
